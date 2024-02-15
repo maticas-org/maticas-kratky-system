@@ -1,0 +1,60 @@
+{
+    "sensors": {
+        "1": {
+            "name": "Humedad",
+            "measure_every_some_time": [
+                0,
+                2,
+                30
+            ]
+        },
+        "0": {
+            "name": "Temperatura",
+            "measure_every_some_time": [
+                0,
+                2,
+                30
+            ]
+        }
+    },
+    "screen": {
+        "refresh_screen_every_some_time": [
+            0,
+            1,
+            0
+        ],
+        "update_every_some_time": [
+            0,
+            1,
+            0
+        ]
+    },
+    "errors": [
+        "Exception: Sorry, seems like the time providers aren't working.... at 05:17:53",
+        "Exception: Sorry, seems like the time providers aren't working.... at 10:11:53",
+        "Exception: Sorry, seems like the time providers aren't working.... at 07:14:50",
+        "Exception: Sorry, seems like the time providers aren't working.... at 09:07:49"
+    ],
+    "ip": "192.168.0.100",
+    "wifi_password": "eict1234",
+    "wifi_ssid": "Aulas EICT",
+    "actuators": {
+        "0": {
+            "starttime": [
+                1,
+                0,
+                0
+            ],
+            "minuteson": 2,
+            "name": "Bomba de agua",
+            "pin": 18,
+            "endtime": [
+                23,
+                59,
+                0
+            ],
+            "type": "timed",
+            "minutesoff": 5
+        }
+    }
+}
