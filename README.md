@@ -13,12 +13,49 @@ In this project we built a modified kratky system which consists of the usual bu
 - Control an AC actuator such as an oxigen pump _(We are expanding in order to control up to 3 AC actuators)._
 
 ![root-growth-view-of-basil-plants](./docs/5.JPG)
+![web-server-of-app](./docs/web-short.gif)
 
 - Local web server to monitor the conditions in the last 3 hours of operations of the device.
 - Local web server available for modifying the periodicity and way the actuator works.
 - Screen to display IP of the device in the local network and other desired data. 
 
-![web-server-of-app](./docs/web-short.gif)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Display</title>
+<style>
+  .image-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-column {
+    flex: 1; 
+    text-align: center; 
+    padding: 5px; /* Optional: adds some space between the images */
+    height: auto;
+    width: 50%; /* Makes the image fill the column width */
+    max-height: 100px;
+  }
+</style>
+</head>
+<body>
+
+<div class="image-row">
+  <div class="image-column">
+    <img src="./docs/5.JPG" alt="root-growth-view-of-basil-plants">
+  </div>
+  <div class="image-column">
+    <img src="./docs/web-short.gif" alt="web-server-of-app">
+  </div>
+</div>
+
+</body>
+</html>
 
 
 
