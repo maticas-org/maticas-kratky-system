@@ -12,51 +12,20 @@ In this project we built a modified kratky system which consists of the usual bu
 - Measure ambient variables such as relative humidity and temperature, allows for extension and triggering of actions with this measurements.
 - Control an AC actuator such as an oxigen pump _(We are expanding in order to control up to 3 AC actuators)._
 
-![root-growth-view-of-basil-plants](./docs/5.JPG)
-![web-server-of-app](./docs/web-short.gif)
 
 - Local web server to monitor the conditions in the last 3 hours of operations of the device.
 - Local web server available for modifying the periodicity and way the actuator works.
 - Screen to display IP of the device in the local network and other desired data. 
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Display</title>
-<style>
-  .image-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .image-column {
-    flex: 1; 
-    text-align: center; 
-    padding: 5px; /* Optional: adds some space between the images */
-    height: auto;
-    width: 50%; /* Makes the image fill the column width */
-    max-height: 100px;
-  }
-</style>
-</head>
-<body>
-
-<div class="image-row">
-  <div class="image-column">
-    <img src="./docs/5.JPG" alt="root-growth-view-of-basil-plants">
+<div style="display: flex; justify-content: center; align-items: center;">
+  <div style="flex: 1; text-align: center; padding: 5px; height: auto; width: 50%;">
+    <img src="./docs/5.JPG" alt="root-growth-view-of-basil-plants" style="width: 100%; height: auto;">
   </div>
-  <div class="image-column">
-    <img src="./docs/web-short.gif" alt="web-server-of-app">
+  <div style="flex: 1; text-align: center; padding: 5px; height: auto; width: 50%;">
+    <img src="./docs/web-short.gif" alt="web-server-of-app" style="width: 100%; height: auto;">
   </div>
 </div>
-
-</body>
-</html>
-
 
 
 ## Notes over the development 📝
@@ -91,9 +60,26 @@ In this project we built a modified kratky system which consists of the usual bu
 
 ## Contributing and TODOs 🔨💻
 
-## Donate 💸
+The following tasks are tasks yet to be done:
 
-![](./docs/4.JPG)
+- Expand to control up to 3 AC actuators.
+- Currently in terms of this architecture diagram we lack the implementation of the insight generator, and the Decision taker module which could be replaced by a PID or other mean of control so that the variables we need to control, we can control. 
+
+<div style="background-color: white; display: inline-block;">
+    <img src="./docs/class-diagram.svg" alt="Code architecture structure">
+</div>
+
+- We are also learning on tiny ML to find new ways predictive tasks can be done in the embedded microcontroller and take better care of the plants.
+
+- Any contribution you feel can be done we would be glad to help, any deploy you want to build we would be also happy to help. 
+
+If you desire you can [join our discord server](https://discord.gg/XzmdYFN4NF)
+
+<iframe src="https://discord.com/widget?id=1210731603760775188&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+
+We are happy to help you, if you want to join or contribute to the project you can contact us in the following ways of communication that we leave below, also feel free to use the channels that github gives us.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dave-alsina-computer-science/)
 
 ## Acknowledgments 🤝🫂
 
@@ -105,3 +91,13 @@ _this box by Sergio will be available soon in this repository_.
 And last but not least at all thanks to Universidad del Rosario, particularly to the EICT team Nicolás Castiblanco, Katherine Escamilla, Julian for providing help on the ideation, PCB manufacturing and soldering, debugging, materials, good conversation and all the good times shared on the process you are great friends and support <3.      
 Thanks to Rafael Mendez our Dean for facilitating all the space for constructing the project, the resources, trust and visibility that keeps us connecting with the right people and ideas, you are an example for us we want to follow <3.
 
+
+## Donate 💸
+
+![](./docs/4.JPG)
+
+
+If you have found this project helpful or if you think it is a good precedent you can support the development of Maticas by donating here:
+
+
+<p align="center"><a href='https://www.buymeacoffee.com/DaveAlsina' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></p>
