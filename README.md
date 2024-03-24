@@ -1,11 +1,26 @@
-# Maticas-Kratky-System 🌱
+# Maticas Kratky System 🌱
 
 In this project we built a modified kratky system which consists of the usual bucket but now incorporates additional oxigenation with an oxigen pump, the idea behind this was to test the results of adding micorrizae to the water and keep it alive inside the kratky system with this additional aeration, comparisson tests still remain to be done yet, however we've got good results with our basil crop test.
 
 
 ![purple-full-spectrum-light-over-out-kratky-system](./docs/1.JPG)
 ![close-view-to-basil-plant](./docs/2.JPG)
+
+## Key features
+
+- Capacity up to 8 plants with the current architecture for the growing system. 
+- Measure ambient variables such as relative humidity and temperature, allows for extension and triggering of actions with this measurements.
+- Control an AC actuator such as an oxigen pump _(We are expanding in order to control up to 3 AC actuators)._
+
 ![root-growth-view-of-basil-plants](./docs/5.JPG)
+
+- Local web server to monitor the conditions in the last 3 hours of operations of the device.
+- Local web server available for modifying the periodicity and way the actuator works.
+- Screen to display IP of the device in the local network and other desired data. 
+
+![web-server-of-app](./docs/web-short.gif)
+
+
 
 ## Notes over the development 📝
 ![root-growth-view-of-basil-plants](./docs/6.JPG)
@@ -35,6 +50,8 @@ In this project we built a modified kratky system which consists of the usual bu
 3. 10 kohm resistor for the DHT11 sensor as a pull up. 
 
 
+![pcb-view](./docs/animation.gif)
+
 ## Contributing and TODOs 🔨💻
 
 ## Donate 💸
@@ -44,6 +61,9 @@ In this project we built a modified kratky system which consists of the usual bu
 ## Acknowledgments 🤝🫂
 
 Thanks a lot to Sergio Colmenares _(our expert in electronic engineering)_ for the testing, development and support with the electronics of this project along with the 3D box design for the protection of the electronics, without you this truly could not have been possible. The ideas and dedication you brought are amazing and hope to continue with this parthership :D.
+
+![](./docs/electronics-with-box.jpg)
+_this box by Sergio will be available soon in this repository_.
 
 And last but not least at all thanks to Universidad del Rosario, particularly to the EICT team Nicolás Castiblanco, Katherine Escamilla, Julian for providing help on the ideation, PCB manufacturing and soldering, debugging, materials, good conversation and all the good times shared on the process you are great friends and support <3.      
 Thanks to Rafael Mendez our Dean for facilitating all the space for constructing the project, the resources, trust and visibility that keeps us connecting with the right people and ideas, you are an example for us we want to follow <3.
