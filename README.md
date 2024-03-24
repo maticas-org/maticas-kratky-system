@@ -19,10 +19,10 @@ In this project we built a modified kratky system which consists of the usual bu
 
 
 <div style="display: flex; justify-content: center; align-items: center;">
-  <div style="flex: 1; text-align: center; padding: 5px; height: auto; width: 50%;">
+  <div style="flex: 1; text-align: center; padding: 5px; height: auto; width: 45%;">
     <img src="./docs/5.JPG" alt="root-growth-view-of-basil-plants" style="width: 100%; height: auto;">
   </div>
-  <div style="flex: 1; text-align: center; padding: 5px; height: auto; width: 50%;">
+  <div style="flex: 1; text-align: center; padding: 5px; height: auto; width: 45%;">
     <img src="./docs/web-short.gif" alt="web-server-of-app" style="width: 100%; height: auto;">
   </div>
 </div>
@@ -73,13 +73,11 @@ The following tasks are tasks yet to be done:
 
 - Any contribution you feel can be done we would be glad to help, any deploy you want to build we would be also happy to help. 
 
-If you desire you can [join our discord server](https://discord.gg/XzmdYFN4NF)
-
-<iframe src="https://discord.com/widget?id=1210731603760775188&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-
 We are happy to help you, if you want to join or contribute to the project you can contact us in the following ways of communication that we leave below, also feel free to use the channels that github gives us.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dave-alsina-computer-science/)
+[![Discord](https://img.shields.io/discord/1210731603760775188)](https://discord.gg/XzmdYFN4NF)
+
 
 ## Acknowledgments 🤝🫂
 
