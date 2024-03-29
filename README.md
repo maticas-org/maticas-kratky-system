@@ -6,6 +6,17 @@ In this project we built a modified kratky system which consists of the usual bu
 ![purple-full-spectrum-light-over-out-kratky-system](./docs/1.JPG)
 ![close-view-to-basil-plant](./docs/2.JPG)
 
+### Results of the basil growing test
+![](./docs/results-roots-1.jpg)
+![](./docs/results-roots-2.jpg)
+
+All the plants are showing a good root development.
+
+![](./docs/results1.jpg)
+![](./docs/results2.jpg)
+
+And so far we've done 10 prunnings in about 2 months. It's true that we now have to develop a better concise and clear way to measure and compare results, but as far as building a system which allows plants to live with out concerning too much about taking care of the plants (5hr/month maximum) we've achived good results.
+
 ## Key features
 
 - Capacity up to 8 plants with the current architecture for the growing system. 
