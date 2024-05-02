@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maticas linea decoración - Modulo 0</title>
+  <link href="https://templatemo.com/tm-style-20210719c.css" rel="stylesheet">
+</head>
+<body>
+  <div class="form-container">
+    <h1>Maticas linea decoración</h1>
+    <h3>Modulo 0</h3>
+    <hr>
+    <form action="/update" method="post">
+      <label for="actuator-select">Seleccionar actuador:</label>
+      <select id="actuator-select" name="actuator">
+        <option value="actuator1">Actuator 1</option>
+        <option value="actuator2">Actuator 2</option>
+        <option value="actuator3">Actuator 3</option>
+      </select>
+      <br><br>
+      <table>
+        <tr>
+          <td><label for="nombre-actuador">Nombre de actuador</label><input type="text" id="nombre-actuador" name="name"></td>
+        </tr>
+        <tr>
+          <td><label for="hora-inicio">Hora de inicio</label><input type="time" step="1" id="hora-inicio" name="starttime"></td>
+        </tr>
+        <tr>
+          <td><label for="hora-fin">Hora de fin</label><input type="time" step="1" id="hora-fin" name="endtime"></td>
+        </tr>
+        <tr>
+          <td><label for="tipo-actuador">Tipo de actuador</label>
+            <select id="tipo-actuador" name="type" onchange="toggleTiempoFields()">
+              <option value="timed" selected>Temporizado</option>
+              <option value="on/off">On/Off</option>
+            </select>
+          </td>
+        </tr>
+        <tr id="minuteson-help-row">
+          <td><br><i>El número de minutos de encendido y apagado debe ser mayor a cero. Se permiten números decimales. Si no se selecciona "Temporizado", la configuración de encendido y apagado se ignorará.</i></td>
+        </tr>
+        <tr id="minuteson-row">
+          <td><label for="minuteson">¿Cuántos minutos encendido?</label><input type="number" id="minuteson" name="minuteson" min="1.0" step="any"></td>
+        </tr>
+        <tr id="-row">
+          <td><label for="minutesoff">¿Cuántos minutos apagado?</label><input type="number" id="minutesoff" name="minutesoff" min="1.0" step="any"></td>
+        </tr>
+      </table>
+      <br><input type="submit" value="Guardar">
+    </form>
+  </div>
+</body>
+</html>
