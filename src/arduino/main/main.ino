@@ -142,7 +142,7 @@ void handleNotFound() {
 
 void handleRoot() {
   Serial.println("Handling /...");
-  server.send(200, "text/html", updateConfigHTML(actuators, 3));
+  server.send(200, "text/html", updateConfigHTML(actuators, 3, rtc));
 }
 
 void handleUpdateActuatorConf() {
@@ -158,7 +158,7 @@ void handleUpdateActuatorConf() {
     String minutesoff = server.arg("minutesoff-" + i);
 
     // Update the configuration of the selected actuator
-    ActuatorConfig actuatorConf = {name, 0, type, DateTime(starttime), DateTime(endtime), minuteson.toInt(), minutesoff.toInt()};
+    ActuatorConfig actuatorConf = {name, actuators[i.toInt()]->pin, type, DateTime(starttime), DateTime(endtime), minuteson.toInt(), minutesoff.toInt()};
     saveActuatorConfig(preferences, &actuatorConf, i.toInt());
     actuators[i.toInt()]->setFromConfig(&actuatorConf);
 

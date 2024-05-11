@@ -1,10 +1,13 @@
 #include <Arduino.h>
+//#include "InternetRTC.h"
 
 
 
-
-String updateConfigHTML(TimedOutput *actuators[], int size) {
-  String html = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Maticas linea decoración - Modulo 0</title><link href=\"https://templatemo.com/tm-style-20210719c.css\" rel=\"stylesheet\"></head><body><div class=\"form-container\"><h1>Maticas linea decoración</h1><h3>Modulo 0</h3><hr><form action=\"/updateActuatorConf\" method=\"post\"><label for=\"actuator-select\">Seleccionar actuador:</label><select id=\"actuator-select\" name=\"actuator\">";
+String updateConfigHTML(TimedOutput *actuators[], int size, InternetRTC &rtc) {
+  String html = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Maticas linea decoración - Modulo 0</title><link href=\"https://templatemo.com/tm-style-20210719c.css\" rel=\"stylesheet\"></head>";
+  html += "<body><div class=\"form-container\"><h1>Maticas linea decoración</h1><h3>Modulo 0</h3><hr>";
+  html += "<p>Hora local del micro controlador: " + rtc.getCurrentDateTime().toString() + "</p>";
+  html += "<form action=\"/updateActuatorConf\" method=\"post\"><label for=\"actuator-select\">Seleccionar actuador:</label><select id=\"actuator-select\" name=\"actuator\">";
   
   // Add options for selecting each actuator
   for (int i = 0; i < size; i++) {
@@ -28,9 +31,9 @@ String updateConfigHTML(TimedOutput *actuators[], int size) {
     html += "<option value=\"on/off\"" + String(actuators[i]->mode == TimedOutput::ON_OFF ? " selected" : "") + ">On/Off</option>";
     html += "<option value=\"periodic\"" + String(actuators[i]->mode == TimedOutput::PERIODIC ? " selected" : "") + ">Periodico</option>";
     html += "</select></td>";
-    html += "<td><label for=\"minuteson-" + String(i) + "\">¿Cuántos minutos encendido?</label>";
+    html += "<td><label for=\"minuteson-" + String(i) + "\">¿Cuántos segundos encendido?</label>";
     html += "<input type=\"number\" id=\"minuteson-" + String(i) + "\" name=\"minuteson-" + String(i) + "\" min=\"1.0\" step=\"any\" value=\"" + String(actuators[i]->onDuration) + "\"></td>";
-    html += "<td><label for=\"minutesoff-" + String(i) + "\">¿Cuántos minutos apagado?</label>";
+    html += "<td><label for=\"minutesoff-" + String(i) + "\">¿Cuántos segundos apagado?</label>";
     html += "<input type=\"number\" id=\"minutesoff-" + String(i) + "\" name=\"minutesoff-" + String(i) + "\" min=\"1.0\" step=\"any\" value=\"" + String(actuators[i]->offDuration) + "\"></td>";
     html += "</tr>";
   }

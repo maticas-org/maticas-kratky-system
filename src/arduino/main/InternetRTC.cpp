@@ -41,11 +41,11 @@ void InternetRTC::syncInternetTime() {
 
   // The formattedDate comes with the following format:
   // 2018-05-28T16:00:13Z
-  String formattedDate = timeClient.getFormattedTime();
-  Serial.print("DateTime: ");
-  Serial.print(formattedDate);
+  String formattedTime = timeClient.getFormattedTime();
+  Serial.print("Time: ");
+  Serial.print(formattedTime);
 
-  currentTime = timeClient.getEpochTime() + TIMEOFFSET;
+  currentTime = timeClient.getEpochTime() + TIMEOFFSET - 25*60; //custom offset to calibrate
   Serial.print(" | Current time: ");
   Serial.println(currentTime);
 }
@@ -59,11 +59,14 @@ unsigned long InternetRTC::getCurrentTime() {
 DateTime InternetRTC::getCurrentDateTime(){
     DateTime dateTime;
     unsigned long time = getCurrentTime();
-    dateTime.year = 1970 + (time / 31556926); // 31556926 seconds per year
-    dateTime.month = 1 + ((time % 31556926) / 2629743); // 2629743 seconds per month
-    dateTime.day = 1 + (((time % 31556926) % 2629743) / 86400); // 86400 seconds per day
-    dateTime.hour = ((time % 31556926) % 2629743) % 86400 / 3600; // 3600 seconds per hour
-    dateTime.minute = (((time % 31556926) % 2629743) % 86400 % 3600) / 60; // 60 seconds per minute
-    dateTime.second = (((time % 31556926) % 2629743) % 86400 % 3600) % 60; // 60 seconds per minute
+    unsigned long seconds_month = 2628288;
+    unsigned long seconds_year = 31556952;
+
+    dateTime.year = 1970 + (time / seconds_year); // 31556926 seconds per year
+    dateTime.month = 1 + ((time % seconds_year) / seconds_month); // 2629743 seconds per month
+    dateTime.day = 1 + (((time % seconds_year) % seconds_month) / 86400); // 86400 seconds per day
+    dateTime.hour = ((time % seconds_year) % seconds_month) % 86400 / 3600; // 3600 seconds per hour
+    dateTime.minute = (((time % seconds_year) % seconds_month) % 86400 % 3600) / 60; // 60 seconds per minute
+    dateTime.second = (((time % seconds_year) % seconds_month) % 86400 % 3600) % 60; // 60 seconds per minute
     return dateTime;
 }
