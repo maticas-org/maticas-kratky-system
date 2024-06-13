@@ -45,7 +45,7 @@ void InternetRTC::syncInternetTime() {
   Serial.print("Time: ");
   Serial.print(formattedTime);
 
-  currentTime = timeClient.getEpochTime() + TIMEOFFSET - 25*60; //custom offset to calibrate
+  currentTime = timeClient.getEpochTime() - TIMEOFFSET - 20*60; //custom offset to calibrate
   Serial.print(" | Current time: ");
   Serial.println(currentTime);
 }
