@@ -19,17 +19,17 @@ void InternetRTC::syncLocalTime() {
 }
 
 // Method to synchronize time using internet time server
-void InternetRTC::syncInternetTime() {
+void InternetRTC::syncInternetTime(int wait_time, int max_retries) {
   Serial.println("Syncing time with internet time server...");
   timeClient.begin();
 
   bool result = timeClient.update();
   int retries = 0;
   
-  while(!result && retries < 5) {
+  while(!result && retries < max_retries) {
     result = timeClient.forceUpdate();
     retries++; 
-    delay(250);
+    delay(wait_time);
   }
 
   if (!result) {

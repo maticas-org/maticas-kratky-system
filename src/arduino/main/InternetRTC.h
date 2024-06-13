@@ -17,7 +17,8 @@ class InternetRTC {
     void syncLocalTime();
 
     // Method to synchronize time using internet time server
-    void syncInternetTime();
+    // wait_time: time to wait between retries in milliseconds
+    void syncInternetTime(int wait_time, int max_retries);
 
     // Getter method to return current time
     unsigned long getCurrentTime();
