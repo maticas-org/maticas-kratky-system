@@ -61,3 +61,74 @@ String updateConfigHTML(TimedOutput *actuators[], int size, InternetRTC &rtc) {
 
   return html;
 }
+
+
+String updateWifiConfig(){
+  String html = "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Maticas línea decoración - Modulo 0</title><link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">";
+  html += "<style>body {background-color: rgba(37, 212, 101, 0.856);display: flex;justify-content: center;align-items: center;height: 100vh;margin: 0;font-family: Arial, sans-serif;}";
+  html += ".form-container {background-color: #fff;padding: 20px;border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);text-align: center;width: 100%;max-width: 1400px;}";
+  html += ".form-container img {width: 150px;margin-bottom: 20px;}";
+  html += ".responsive-text h1 {font-size: calc(1.5rem + 1vw);}";
+  html += ".responsive-text h3 {font-size: calc(1rem + 0.5vw);}";
+  html += "table {width: 100%;}</style></head>";
+  html += "<body><div class=\"container\"><div class=\"form-container mx-auto responsive-text\">";
+  html += "<h1>Maticas Tech línea Multipropósito</h1><h3>Módulo 0</h3><hr>";
+  html += "<p>¡Bienvenido a la configuración de red del módulo Maticas Tech 😄!</p>";
+  html += "<p> Nos enorgullece que estés aquí, por favor ingresa los datos de tu red WIFI para continuar.</p>";
+  html += "<p> Ante cualquier duda o problema, no dudes en <a href=\"http://maticas-tech.com/es/contactanos\">contactarnos</a>. Estamos para ayudarte.</p>";
+  html += "<p> ¡Gracias por confiar en nosotros 🤝🫂!</p>";
+  html += "<h1>Configuración de red</h1>";
+
+  html += "<form action=\"/updateWifiConf\" method=\"post\">";
+  html += "<div class=\"form-group\"><label for=\"ssid\">Nombre de la red WIFI</label>";
+  html += "<input type=\"text\" id=\"ssid\" name=\"ssid\" class=\"form-control\"></div>";
+  html += "<div class=\"form-group\"><label for=\"password\">Contraseña de la red WIFI</label>";
+  html += "<input type=\"password\" id=\"password\" name=\"password\" class=\"form-control\"></div>";
+  html += "<button type=\"submit\" class=\"btn btn-success\">Guardar</button></form></div></div>";
+
+  html += "<script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>";
+  html += "<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js\"></script>";
+  html += "<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script></body></html>";
+
+  return html;
+}
+
+String makingChangesHTML() {
+  String html = "<!DOCTYPE html>";
+  html += "<html lang=\"es\">";
+  html += "<head>";
+  html += "<meta charset=\"UTF-8\">";
+  html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+  html += "<title>Maticas línea decoración - Modulo 0</title>";
+  html += "<link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">";
+  html += "<style>";
+  html += "body {background-color: rgba(37, 212, 101, 0.856);display: flex;justify-content: center;align-items: center;height: 100vh;margin: 0;font-family: Arial, sans-serif;}";
+  html += ".form-container {background-color: #fff;padding: 20px;border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);text-align: center;width: 100%;max-width: 1400px;}";
+  html += ".form-container img {width: 150px;margin-bottom: 20px;}";
+  html += ".responsive-text h1 {font-size: calc(1.5rem + 1vw);}";
+  html += ".responsive-text h3 {font-size: calc(1rem + 0.5vw);}";
+  html += "table {width: 100%;}";
+  html += "</style>";
+  html += "</head>";
+  html += "<body>";
+  html += "<div class=\"container\">";
+  html += "<div class=\"form-container mx-auto responsive-text\">";
+  html += "<h1>Maticas Tech línea Multipropósito</h1>";
+  html += "<h3>Módulo 0</h3>";
+  html += "<hr>";
+  html += "<p>¡Estamos realizando cambios en la configuración de tu módulo Maticas Tech! 😄</p>";
+  html += "<p>Por favor espera un momento mientras se aplican los cambios. Usualmente toma menos de 1 minuto.</p>";
+  html += "<hr>";
+  html += "<p>Si cambiaste la configuración de red, es posible que debas reconectarte a la red WIFI del módulo <em>(\"Maticas Tech Module\")</em> si el proceso de conectar a la red WIFI que ingresaste falla.</p>";
+  html += "<p>Si el proceso de conexión fue exitoso, puedes conectarte a tu red WIFI principal y acceder a la configuración del módulo en la dirección <a href=\"http://maticas-tech.local\">http://maticas-tech.local</a></p>";
+  html += "<p>Ante cualquier duda o problema, no dudes en <a href=\"http://maticas-tech.com/es/contactanos\">contactarnos</a>. Estamos para ayudarte.</p>";
+  html += "<p>¡Gracias por confiar en nosotros 🤝🫂!</p>";
+  html += "</div>";
+  html += "</div>";
+  html += "<script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>";
+  html += "<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js\"></script>";
+  html += "<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>";
+  html += "</body>";
+  html += "</html>";
+  return html;
+}
