@@ -120,7 +120,7 @@ String makingChangesHTML() {
   html += "<p>Por favor espera un momento mientras se aplican los cambios. Usualmente toma menos de 1 minuto.</p>";
   html += "<hr>";
   html += "<p>Si cambiaste la configuración de red, es posible que debas reconectarte a la red WIFI del módulo <em>(\"Maticas Tech Module\")</em> si el proceso de conectar a la red WIFI que ingresaste falla.</p>";
-  html += "<p>Si el proceso de conexión fue exitoso, puedes conectarte a tu red WIFI principal y acceder a la configuración del módulo en la dirección <a href=\"http://maticas-tech.local\">http://maticas-tech.local</a></p>";
+  html += "<p>Si el proceso de conexión fue exitoso, puedes conectarte a tu red WIFI principal y acceder a la configuración del módulo en la dirección IP que muestra la pantalla :D.</p>";
   html += "<p>Ante cualquier duda o problema, no dudes en <a href=\"http://maticas-tech.com/es/contactanos\">contactarnos</a>. Estamos para ayudarte.</p>";
   html += "<p>¡Gracias por confiar en nosotros 🤝🫂!</p>";
   html += "</div>";

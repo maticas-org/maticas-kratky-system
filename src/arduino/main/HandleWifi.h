@@ -3,9 +3,19 @@
 #include <Preferences.h>
 #include "secrets.h"
 
+// Custom IP configuration
+IPAddress local_IP(192, 168, 1, 69);
+IPAddress gateway(192, 168, 1, 1);
+IPAddress subnet(255, 255, 255, 0);
+
+
 // Method to connect to WiFi
 void connectToWiFi(String &ssid, String &password){
+    // Set hostname
+    WiFi.setHostname(MDNS_NAME);
+
     if (ssid.length() > 0 && password.length() > 0) {
+
         // Try to connect using stored credentials
         WiFi.begin(ssid.c_str(), password.c_str());
         Serial.println("Connecting to WiFi...");
@@ -18,14 +28,30 @@ void connectToWiFi(String &ssid, String &password){
 
         if (WiFi.status() == WL_CONNECTED) {
             Serial.println("\nConnected to WiFi");
-            return;
+            Serial.println("IP address: " + WiFi.localIP().toString());
+            
+            // set up mDNS responder
+            if  (!MDNS.begin(MDNS_NAME)) {
+                Serial.println("Error setting up MDNS responder!");
+            }else{
+                Serial.println("MDNS responder started");
+            }
+
+            return ;
         }
     }
 
     // If connection failed or no credentials stored, start AP mode
     Serial.println("\nStarting AP mode...");
     WiFi.softAP(AP_SSID, AP_PASSWORD);
-    Serial.println("AP mode started. Connect to 'ESP32_Config' and go to http://192.168.4.1/config");
+    WiFi.softAPConfig(local_IP, gateway, subnet); // Set custom IP configuration
+    Serial.println("AP mode started. Connect to 'ESP32_Config' and go to http://" + local_IP.toString() + " to configure WiFi");
+
+    if (!MDNS.begin(MDNS_NAME)) {
+        Serial.println("Error setting up MDNS responder!");
+    }else{
+        Serial.println("MDNS responder started");
+    }
 }
 
 

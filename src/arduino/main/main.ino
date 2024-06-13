@@ -46,6 +46,7 @@ WebServer server(80);
 TaskHandle_t Task1;
 TaskHandle_t Task2;
 
+
 // Method declarations
 void mainControl(void *pvParameters);
 void webServerTask(void *pvParameters);
@@ -66,7 +67,7 @@ void setup() {
     connectToWiFi(preferences);
 
     // Initialize server
-    if (MDNS.begin("esp32")) {
+    if (MDNS.begin(MDNS_NAME)) {
         Serial.println("MDNS responder started");
     }
     delay(250);
