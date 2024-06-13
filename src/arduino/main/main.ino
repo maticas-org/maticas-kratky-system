@@ -14,6 +14,8 @@
 
 // Define sync interval
 #define SYNC_INTERVAL 12*60*60*1000 // Sync time every 12 hours
+#define SYNC_RETRY_INTERVAL 10000
+#define SYNC_MAX_RETRIES 30
 InternetRTC rtc; // Create an instance of the InternetRTC class
 
 // Define output pin
@@ -47,9 +49,12 @@ TaskHandle_t Task2;
 // Method declarations
 void mainControl(void *pvParameters);
 void webServerTask(void *pvParameters);
-void handleNotFound();
 void handleRoot();
+void handleNotFound();
+void handleWifiConfig();
+void handleMakingChanges();
 void handleUpdateActuatorConf();
+void handleUpdateWifiConfig();
 
 
 void setup() {
@@ -58,7 +63,7 @@ void setup() {
     Serial.println("Starting Setup...");
 
     // Connect to WiFi
-    connectToWiFi();
+    connectToWiFi(preferences);
 
     // Initialize server
     if (MDNS.begin("esp32")) {
@@ -66,24 +71,27 @@ void setup() {
     }
     delay(250);
     server.on("/", handleRoot);
+    server.on("/makingChanges", HTTP_GET, handleMakingChanges);
+    server.on("/wifiConfig", HTTP_GET, handleWifiConfig);
+    server.on("/updateWifiConf", HTTP_POST, handleUpdateWifiConfig);
     server.on("/updateActuatorConf", HTTP_POST, handleUpdateActuatorConf);
     server.onNotFound(handleNotFound);
     server.begin();
-
-    // Initialize RTC
-    rtc.syncInternetTime();
-
-    // Load previous configurations and set actuators
-    updateDefaultConfigs(preferences, actuatorConfigs, 3);
-    for (int i = 0; i < 3; i++) {
-        actuators[i]->setFromConfig(actuatorConfigs[i]);
-    }
 
     // Create tasks for the main control loop and web server
     xTaskCreatePinnedToCore(mainControl, "mainControl", 20000, NULL, 1, &Task1, 0);
     delay(500); 
     xTaskCreatePinnedToCore(webServerTask, "webServerTask", 20000, NULL, 1, &Task2, 1);
     delay(500); 
+
+    // Initialize RTC
+    rtc.syncInternetTime(SYNC_RETRY_INTERVAL, SYNC_MAX_RETRIES);
+
+    // Load previous configurations and set actuators
+    updateDefaultConfigs(preferences, actuatorConfigs, 3);
+    for (int i = 0; i < 3; i++) {
+        actuators[i]->setFromConfig(actuatorConfigs[i]);
+    }
 }
 
 void loop() {
@@ -102,8 +110,8 @@ void mainControl(void *pvParameters){
         // Synchronize time every 10 minutes
         static unsigned long previousSyncTime = 0;
         if (millis() - previousSyncTime > SYNC_INTERVAL) {
-            checkWiFiConnection();
-            rtc.syncInternetTime();
+            checkWiFiConnection(preferences);
+            rtc.syncInternetTime(SYNC_RETRY_INTERVAL, SYNC_MAX_RETRIES);
             previousSyncTime = millis();
         }else{
             rtc.syncLocalTime();
@@ -123,6 +131,30 @@ void webServerTask(void *pvParameters){
     }
 }
 
+// **************************************************************
+// * Web server handlers
+// **************************************************************
+
+//---------------------------
+// GET Requests handlers
+//---------------------------
+void handleRoot() {
+  Serial.println("Handling /...");
+
+  //check if the module is connected to the internet
+  // if not, redirect to the wifi config page
+  if (WiFi.status() != WL_CONNECTED) {
+    server.send(200, "text/html", updateWifiConfig());
+  }else{
+    server.send(200, "text/html", updateConfigHTML(actuators, 3, rtc));
+  }
+}
+
+void handleWifiConfig() {
+  Serial.println("Handling /wifiConfig...");
+  server.send(200, "text/html", updateWifiConfig());
+}
+
 void handleNotFound() {
   Serial.println("Handling unknown path...");
   String message = "File Not Found\n\n";
@@ -140,11 +172,20 @@ void handleNotFound() {
   server.send(404, "text/plain", message);
 }
 
-void handleRoot() {
-  Serial.println("Handling /...");
-  server.send(200, "text/html", updateConfigHTML(actuators, 3, rtc));
+void handleMakingChanges() {
+  Serial.println("Handling /makingChanges...");
+  server.send(200, "text/html", makingChangesHTML());
+    
+  // Allow some time for the client to receive the response
+  delay(2000);
+
+  // Reset the ESP32 to apply changes
+  ESP.restart();
 }
 
+//---------------------------
+// POST Requests handlers
+//---------------------------
 void handleUpdateActuatorConf() {
   Serial.println("Handling /updateActuatorConf...");
   // Check if the request has JSON data
@@ -171,4 +212,26 @@ void handleUpdateActuatorConf() {
     Serial.println("Error parsing JSON data");
     server.send(400, "text/plain", "Error parsing JSON data" + String(e.what()));
   }
+}
+
+
+void handleUpdateWifiConfig() {
+  Serial.println("Handling /updateWifiConf...");
+  // Check if the request has JSON data
+  try{
+    String ssid = server.arg("ssid");
+    String password = server.arg("password");
+
+    // Update the configuration of the selected actuator
+    saveWifiConfig(preferences, ssid, password);
+
+    // Redirect to making changes page
+    server.sendHeader("Location", "/makingChanges", true);
+    server.send(302, "text/plain", "");
+
+  } catch (const std::exception& e) {
+    Serial.println("Error parsing JSON data");
+    server.send(400, "text/plain", "Error parsing JSON data" + String(e.what()));
+  }
+
 }
