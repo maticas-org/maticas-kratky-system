@@ -34,3 +34,12 @@ void saveActuatorConfig(Preferences &preferences,
     preferences.putUInt("offDuration", actuatorConfig->offDuration);
     preferences.end();
 }
+
+void saveWifiConfig(Preferences &preferences,
+                    String ssid,
+                    String password) {
+    preferences.begin("wifi", false);
+    preferences.putString("ssid", ssid);
+    preferences.putString("password", password);
+    preferences.end();
+}
