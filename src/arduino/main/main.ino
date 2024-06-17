@@ -1,16 +1,24 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
+#include <Wire.h>
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <WebServer.h>
 #include <ESPmDNS.h>
 #include <Preferences.h>
+#include <Adafruit_SSD1306.h>
 
 #include "InternetRTC.h"
 #include "TimedOutput.h"
 #include "HtmlPages.h"
 #include "HandleConfigs.h"
 #include "HandleWifi.h"
+
+#define SCREEN_WIDTH  128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64  // OLED display height, in pixels
+#define OLED_RESET    -1  // Reset pin # (or -1 if sharing Arduino reset pin)
+#define OLED_SYNC_INTERVAL 30000 // Sync screen every 30 seconds
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // Define sync interval
 #define SYNC_INTERVAL 12*60*60*1000 // Sync time every 12 hours
@@ -40,6 +48,7 @@ Preferences preferences;
 TimedOutput *actuators[] = {&output1, &output2, &output3};
 
 // Create an instance of the AsyncWebServer class
+bool connected = false;
 WebServer server(80);
 
 // Tasks to run
@@ -63,8 +72,13 @@ void setup() {
     Serial.begin(115200);
     Serial.println("Starting Setup...");
 
+    // Initialize display
+    if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3C for 128x64
+        Serial.println(F("SSD1306 allocation failed"));
+    }
+
     // Connect to WiFi
-    connectToWiFi(preferences);
+    connected = connectToWiFi(preferences);
 
     // Initialize server
     if (MDNS.begin(MDNS_NAME)) {
@@ -101,6 +115,12 @@ void loop() {
 
 // Method to control actuators based on configuration
 void mainControl(void *pvParameters){
+
+    // Synchronize time every 10 minutes
+    static unsigned long previousSyncTime = 0;
+    // Sync screen every 30 seconds
+    static unsigned long previousScreenTime = 0;
+
     while (true)
     {
         // Update output state based on current time
@@ -108,18 +128,23 @@ void mainControl(void *pvParameters){
             actuators[i]->updateOutputState(rtc.getCurrentDateTime());
         }
 
-        // Synchronize time every 10 minutes
-        static unsigned long previousSyncTime = 0;
         if (millis() - previousSyncTime > SYNC_INTERVAL) {
-            checkWiFiConnection(preferences);
+            connected = checkWiFiConnection(preferences);
             rtc.syncInternetTime(SYNC_RETRY_INTERVAL, SYNC_MAX_RETRIES);
             previousSyncTime = millis();
         }else{
             rtc.syncLocalTime();
         }
 
-        // Delay for 1 second
-        delay(2500);
+        if (millis() - previousScreenTime > OLED_SYNC_INTERVAL) {
+            screenDisplay();
+            previousScreenTime = millis();
+        }else if ( previousScreenTime == 0){
+            screenDisplay();
+            previousScreenTime = millis();
+        }
+
+        delay(500); 
         Serial.println();
     }
 }
@@ -130,6 +155,45 @@ void webServerTask(void *pvParameters){
         server.handleClient();
         delay(2);//allow the cpu to switch to other tasks
     }
+}
+
+void screenDisplay() {
+
+    // Display the current date and time
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0,0);
+    display.println("Fecha-Hora");
+    display.println(rtc.getCurrentDateTime().toString());
+    display.display();
+    delay(2000); // Display the time for 2 seconds
+
+    // Display Maticas Tech URL
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0,0);
+    display.println("Visitanos en:");
+    display.println("maticas-tech.com");
+    display.display();
+    delay(2000); // Display the URL for 2 seconds
+
+    // Display the current device IP
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0,0);
+    display.println("Direccion IP: ");
+    display.println(WiFi.localIP().toString());
+    display.display();
+    delay(2000); // Display the IP for 2 seconds
+
+    // Display the logo
+    display.clearDisplay();
+    display.drawBitmap(0, 0, logo_bmp, SCREEN_WIDTH, SCREEN_HEIGHT, SSD1306_WHITE);
+    display.display();
+    delay(2000); // Display the logo for 2 seconds
 }
 
 // **************************************************************
@@ -144,7 +208,7 @@ void handleRoot() {
 
   //check if the module is connected to the internet
   // if not, redirect to the wifi config page
-  if (WiFi.status() != WL_CONNECTED) {
+  if (!connected) {
     server.send(200, "text/html", updateWifiConfig());
   }else{
     server.send(200, "text/html", updateConfigHTML(actuators, 3, rtc));
