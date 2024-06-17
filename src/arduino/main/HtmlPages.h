@@ -2,7 +2,10 @@
 //#include "InternetRTC.h"
 
 String updateConfigHTML(TimedOutput *actuators[], int size, InternetRTC &rtc) {
-  String html = "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Maticas línea decoración - Modulo 0</title><link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">";
+  String html = "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+  html += "<title>Maticas línea multipropósito - Modulo 0</title>";
+  html += "<link rel=\"icon\" type=\"image/svg+xml\" href=\"https://raw.githubusercontent.com/maticas-org/maticas-web-page/c09a8c15c1e460f7b7f1edadfcc2fe08f04d301a/public/maticas-tech-logo.svg\">";
+  html += "<link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">";
   html += "<style>body {background-color: rgba(37, 212, 101, 0.856);display: flex;justify-content: center;align-items: center;height: 100vh;margin: 0;font-family: Arial, sans-serif;}";
   html += ".form-container {background-color: #fff;padding: 20px;border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);text-align: center;width: 100%;max-width: 1400px;}";
   html += ".form-container img {width: 150px;margin-bottom: 20px;}";
@@ -64,7 +67,10 @@ String updateConfigHTML(TimedOutput *actuators[], int size, InternetRTC &rtc) {
 
 
 String updateWifiConfig(){
-  String html = "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Maticas línea decoración - Modulo 0</title><link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">";
+  String html = "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+  html += "<title>Maticas línea multipropósito - Modulo 0</title>";
+  html += "<link rel=\"icon\" type=\"image/svg+xml\" href=\"https://raw.githubusercontent.com/maticas-org/maticas-web-page/c09a8c15c1e460f7b7f1edadfcc2fe08f04d301a/public/maticas-tech-logo.svg\">";
+  html += "<link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">";
   html += "<style>body {background-color: rgba(37, 212, 101, 0.856);display: flex;justify-content: center;align-items: center;height: 100vh;margin: 0;font-family: Arial, sans-serif;}";
   html += ".form-container {background-color: #fff;padding: 20px;border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);text-align: center;width: 100%;max-width: 1400px;}";
   html += ".form-container img {width: 150px;margin-bottom: 20px;}";
@@ -99,7 +105,8 @@ String makingChangesHTML() {
   html += "<head>";
   html += "<meta charset=\"UTF-8\">";
   html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
-  html += "<title>Maticas línea decoración - Modulo 0</title>";
+  html += "<title>Maticas línea multipropósito - Modulo 0</title>";
+  html += "<link rel=\"icon\" type=\"image/svg+xml\" href=\"https://raw.githubusercontent.com/maticas-org/maticas-web-page/c09a8c15c1e460f7b7f1edadfcc2fe08f04d301a/public/maticas-tech-logo.svg\">";
   html += "<link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">";
   html += "<style>";
   html += "body {background-color: rgba(37, 212, 101, 0.856);display: flex;justify-content: center;align-items: center;height: 100vh;margin: 0;font-family: Arial, sans-serif;}";
