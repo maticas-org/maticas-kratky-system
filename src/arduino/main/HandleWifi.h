@@ -10,7 +10,7 @@ IPAddress subnet(255, 255, 255, 0);
 
 
 // Method to connect to WiFi
-void connectToWiFi(String &ssid, String &password){
+bool connectToWiFi(String &ssid, String &password){
     // Set hostname
     WiFi.setHostname(MDNS_NAME);
 
@@ -37,7 +37,7 @@ void connectToWiFi(String &ssid, String &password){
                 Serial.println("MDNS responder started");
             }
 
-            return ;
+            return true;
         }
     }
 
@@ -52,10 +52,12 @@ void connectToWiFi(String &ssid, String &password){
     }else{
         Serial.println("MDNS responder started");
     }
+
+    return false;
 }
 
 
-void connectToWiFi(Preferences &preferences){
+bool connectToWiFi(Preferences &preferences){
     // Initialize Preferences
     preferences.begin("wifi", false);
 
@@ -64,18 +66,18 @@ void connectToWiFi(Preferences &preferences){
     String password = preferences.getString("password", "");
 
     // Connect to WiFi
-    connectToWiFi(ssid, password);
+    return connectToWiFi(ssid, password);
 }
 
 // Method to check WiFi connection, reconnect if necessary
-void checkWiFiConnection(String &ssid, String &password){
+bool checkWiFiConnection(String &ssid, String &password){
     if (WiFi.status() != WL_CONNECTED) {
         Serial.println("WiFi connection lost. Reconnecting...");
-        connectToWiFi(ssid, password);
+        return connectToWiFi(ssid, password);
     }
 }
 
-void checkWiFiConnection(Preferences &preferences){
+bool checkWiFiConnection(Preferences &preferences){
     // Initialize Preferences
     preferences.begin("wifi", false);
 
@@ -83,5 +85,5 @@ void checkWiFiConnection(Preferences &preferences){
     String ssid = preferences.getString("ssid", "");
     String password = preferences.getString("password", "");
 
-    checkWiFiConnection(ssid, password);
+    return checkWiFiConnection(ssid, password);
 }
