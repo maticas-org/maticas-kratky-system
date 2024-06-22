@@ -89,6 +89,34 @@ We are happy to help you, if you want to join or contribute to the project you c
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dave-alsina-computer-science/)
 [![Discord](https://img.shields.io/discord/1210731603760775188)](https://discord.gg/XzmdYFN4NF)
 
+## License Notice ⚖️
+
+This project is licensed under two different licenses for different components:
+
+### Hardware
+All hardware designs in this repository are licensed under the **CERN Open Hardware Licence Version 2 - Strongly Reciprocal (CERN-OHL-S-2.0)**. 
+
+You may use, study, modify, share, and distribute the hardware designs under the terms of the CERN-OHL-S-2.0. The full license text can be found in the `LICENSE.CERN-OHL-v2-Strongly-Reciprocal` file.
+
+### Software
+All software in this repository is licensed under the **GNU General Public License Version 3.0 (GPL-3.0)**.
+
+You may use, modify, and distribute the software under the terms of the GPL-3.0. The full license text can be found in the `LICENSE.GPLv3` file.
+
+---
+
+**CERN Open Hardware Licence Version 2 - Strongly Reciprocal (CERN-OHL-S-2.0)**
+
+Licensed under the CERN-OHL-S-2.0. You may obtain a copy of the License at [CERN-OHL-S-2.0 License](https://www.ohwr.org/project/cernohl/wikis/Documents/CERN-OHL-version-2).
+
+**GNU General Public License Version 3.0 (GPL-3.0)**
+
+Licensed under the GPL-3.0. You may obtain a copy of the License at [GPL-3.0 License](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+---
+
+Please refer to these licenses for details on your rights and responsibilities when using, modifying, and distributing components of this project.
+
 
 ## Acknowledgments 🤝🫂
 
